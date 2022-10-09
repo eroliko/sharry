@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Http\Containers\CastTypeEnums;
+namespace App\Http\Containers\CastTypeEnumsContainer;
 
 use App\Http\Core\Casts\CastTypeEnums;
 

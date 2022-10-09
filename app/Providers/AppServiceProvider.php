@@ -2,16 +2,10 @@
 
 namespace App\Providers;
 
-use App\Http\Containers\ActorContainer\Contracts\ActorQueryInterface;
-use App\Http\Containers\ActorContainer\Contracts\ActorRepositoryInterface;
-use App\Http\Containers\ActorContainer\Queries\ActorQueryBuilder;
-use App\Http\Containers\ActorContainer\Repositories\ActorRepository;
-use App\Http\Containers\MovieContainer\Contracts\MovieQueryInterface;
-use App\Http\Containers\MovieContainer\Contracts\MovieRepositoryInterface;
-use App\Http\Containers\MovieContainer\Queries\MovieQueryBuilder;
-use App\Http\Containers\MovieContainer\Repositories\MovieRepository;
-use App\Http\Containers\PaginationContainer\PaginationService;
-use App\Http\Core\Paginator\PaginatorDriver;
+use App\Http\Containers\UsersContainer\Contracts\UsersQueryInterface;
+use App\Http\Containers\UsersContainer\Contracts\UsersRepositoryInterface;
+use App\Http\Containers\UsersContainer\Queries\UsersQueryBuilder;
+use App\Http\Containers\UsersContainer\Repositories\UsersRepository;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -24,28 +18,13 @@ class AppServiceProvider extends ServiceProvider
     public function register(): void
     {
         $this->app->bind(
-            MovieQueryInterface::class,
-            MovieQueryBuilder::class,
+            UsersQueryInterface::class,
+            UsersQueryBuilder::class,
         );
 
         $this->app->bind(
-            MovieRepositoryInterface::class,
-            MovieRepository::class,
-        );
-
-        $this->app->bind(
-            ActorQueryInterface::class,
-            ActorQueryBuilder::class,
-        );
-
-        $this->app->bind(
-            ActorRepositoryInterface::class,
-            ActorRepository::class,
-        );
-
-        $this->app->bind(
-            PaginatorDriver::class,
-            PaginationService::class,
+            UsersRepositoryInterface::class,
+            UsersRepository::class,
         );
     }
 
