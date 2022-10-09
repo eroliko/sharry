@@ -1,7 +1,9 @@
 # Sharry mini project
 This is a mini project for Sharry company.
 
-To accomplish the assigment I used Laravel 9
+To accomplish the assigment I used Laravel 9 
+on [Porto](https://github.com/Mahmoudz/Porto) 
+architecture.
 
 ## Requirements
 - Docker
@@ -17,12 +19,18 @@ int the opened environment:
 - `composer i`
 - `php artisan key:generate`
 - `php artisan migrate`
+- `php artisan db:seed`
+
+## Usage
+See routes via `php artisan route:list` command,
+they are self-explanatory, and call provided EPs.
+
+To authenticate, use `POST:sanctum/token` route
+(provide `email` and `password`).
+
+Seeded users are to find in `users` table, all of them have
+password `password`.
 
 ## Server
 Server was tested on Ubuntu Ubuntu 22.04.1 LTS with Docker version
 20.10.18, build b40c2f6.
-
-## Usage
-Go to URL `http://sharry.localhost`. MySQL DB is accessible
-via URL `http://localhost:3000/` - credentials are in the
-`.env.example` file.
