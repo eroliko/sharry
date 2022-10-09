@@ -2,6 +2,10 @@
 
 namespace App\Providers;
 
+use App\Http\Containers\NewsContainer\Contracts\NewsQueryInterface;
+use App\Http\Containers\NewsContainer\Contracts\NewsRepositoryInterface;
+use App\Http\Containers\NewsContainer\Queries\NewsQueryBuilder;
+use App\Http\Containers\NewsContainer\Repositories\NewsRepository;
 use App\Http\Containers\UsersContainer\Contracts\UsersQueryInterface;
 use App\Http\Containers\UsersContainer\Contracts\UsersRepositoryInterface;
 use App\Http\Containers\UsersContainer\Queries\UsersQueryBuilder;
@@ -25,6 +29,16 @@ class AppServiceProvider extends ServiceProvider
         $this->app->bind(
             UsersRepositoryInterface::class,
             UsersRepository::class,
+        );
+
+        $this->app->bind(
+            NewsQueryInterface::class,
+            NewsQueryBuilder::class,
+        );
+
+        $this->app->bind(
+            NewsRepositoryInterface::class,
+            NewsRepository::class,
         );
     }
 
