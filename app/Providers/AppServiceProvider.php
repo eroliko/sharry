@@ -2,6 +2,10 @@
 
 namespace App\Providers;
 
+use App\Http\Containers\CommentsContainer\Contracts\CommentsQueryInterface;
+use App\Http\Containers\CommentsContainer\Contracts\CommentsRepositoryInterface;
+use App\Http\Containers\CommentsContainer\Queries\CommentsQueryBuilder;
+use App\Http\Containers\CommentsContainer\Repositories\CommentsRepository;
 use App\Http\Containers\EventsContainer\Contracts\EventsQueryInterface;
 use App\Http\Containers\EventsContainer\Contracts\EventsRepositoryInterface;
 use App\Http\Containers\EventsContainer\Queries\EventsQueryBuilder;
@@ -53,6 +57,16 @@ class AppServiceProvider extends ServiceProvider
         $this->app->bind(
             EventsRepositoryInterface::class,
             EventsRepository::class,
+        );
+
+        $this->app->bind(
+            CommentsQueryInterface::class,
+            CommentsQueryBuilder::class,
+        );
+
+        $this->app->bind(
+            CommentsRepositoryInterface::class,
+            CommentsRepository::class,
         );
     }
 
