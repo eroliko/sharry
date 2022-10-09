@@ -5,10 +5,7 @@ declare(strict_types=1);
 namespace App\Http\Containers\NewsContainer\Contracts;
 
 use App\Http\Containers\NewsContainer\Models\News;
-use App\Http\Containers\PaginationContainer\PaginationService;
-use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
-use Illuminate\Http\Request;
 use Illuminate\Support\Collection;
 
 interface NewsRepositoryInterface
