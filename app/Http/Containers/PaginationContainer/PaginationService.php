@@ -13,9 +13,10 @@ use Illuminate\Http\Request;
 final class PaginationService extends PaginationClass implements PaginatorDriver
 {
     public function run(
-        Builder $queryBuilder,
+        Builder|\Illuminate\Database\Query\Builder $queryBuilder,
         Request $request,
-        int|bool $limit = false
+        int|bool $limit = false,
+        string $pageParameterName = 'page',
     ): LengthAwarePaginator
     {
         if ($limit) {
@@ -28,11 +29,12 @@ final class PaginationService extends PaginationClass implements PaginatorDriver
             ;
         }
 
-        $page = !empty($request->input('page')) ? ((int)$request->input('page')) : 1;
+        $page = !empty($request->input($pageParameterName)) ? ((int)$request->input($pageParameterName)) : 1;
 
         return $queryBuilder->paginate(
             $pageItems,
-            page: $page
+            pageName: $pageParameterName,
+            page: $page,
         );
     }
 }

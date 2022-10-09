@@ -2,16 +2,22 @@
 
 namespace App\Providers;
 
-use App\Http\Containers\ActorContainer\Contracts\ActorQueryInterface;
-use App\Http\Containers\ActorContainer\Contracts\ActorRepositoryInterface;
-use App\Http\Containers\ActorContainer\Queries\ActorQueryBuilder;
-use App\Http\Containers\ActorContainer\Repositories\ActorRepository;
-use App\Http\Containers\MovieContainer\Contracts\MovieQueryInterface;
-use App\Http\Containers\MovieContainer\Contracts\MovieRepositoryInterface;
-use App\Http\Containers\MovieContainer\Queries\MovieQueryBuilder;
-use App\Http\Containers\MovieContainer\Repositories\MovieRepository;
-use App\Http\Containers\PaginationContainer\PaginationService;
-use App\Http\Core\Paginator\PaginatorDriver;
+use App\Http\Containers\CommentsContainer\Contracts\CommentsQueryInterface;
+use App\Http\Containers\CommentsContainer\Contracts\CommentsRepositoryInterface;
+use App\Http\Containers\CommentsContainer\Queries\CommentsQueryBuilder;
+use App\Http\Containers\CommentsContainer\Repositories\CommentsRepository;
+use App\Http\Containers\EventsContainer\Contracts\EventsQueryInterface;
+use App\Http\Containers\EventsContainer\Contracts\EventsRepositoryInterface;
+use App\Http\Containers\EventsContainer\Queries\EventsQueryBuilder;
+use App\Http\Containers\EventsContainer\Repositories\EventsRepository;
+use App\Http\Containers\NewsContainer\Contracts\NewsQueryInterface;
+use App\Http\Containers\NewsContainer\Contracts\NewsRepositoryInterface;
+use App\Http\Containers\NewsContainer\Queries\NewsQueryBuilder;
+use App\Http\Containers\NewsContainer\Repositories\NewsRepository;
+use App\Http\Containers\UsersContainer\Contracts\UsersQueryInterface;
+use App\Http\Containers\UsersContainer\Contracts\UsersRepositoryInterface;
+use App\Http\Containers\UsersContainer\Queries\UsersQueryBuilder;
+use App\Http\Containers\UsersContainer\Repositories\UsersRepository;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -24,28 +30,43 @@ class AppServiceProvider extends ServiceProvider
     public function register(): void
     {
         $this->app->bind(
-            MovieQueryInterface::class,
-            MovieQueryBuilder::class,
+            UsersQueryInterface::class,
+            UsersQueryBuilder::class,
         );
 
         $this->app->bind(
-            MovieRepositoryInterface::class,
-            MovieRepository::class,
+            UsersRepositoryInterface::class,
+            UsersRepository::class,
         );
 
         $this->app->bind(
-            ActorQueryInterface::class,
-            ActorQueryBuilder::class,
+            NewsQueryInterface::class,
+            NewsQueryBuilder::class,
         );
 
         $this->app->bind(
-            ActorRepositoryInterface::class,
-            ActorRepository::class,
+            NewsRepositoryInterface::class,
+            NewsRepository::class,
         );
 
         $this->app->bind(
-            PaginatorDriver::class,
-            PaginationService::class,
+            EventsQueryInterface::class,
+            EventsQueryBuilder::class,
+        );
+
+        $this->app->bind(
+            EventsRepositoryInterface::class,
+            EventsRepository::class,
+        );
+
+        $this->app->bind(
+            CommentsQueryInterface::class,
+            CommentsQueryBuilder::class,
+        );
+
+        $this->app->bind(
+            CommentsRepositoryInterface::class,
+            CommentsRepository::class,
         );
     }
 
