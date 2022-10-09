@@ -24,6 +24,10 @@ class NewsDeleteAction extends NewsAction
     {
         $new = $this->newsRepository->get($id);
 
+        if ($new->getComments()->count() > 0) {
+            throw new UnauthorizedException("New contains comments - cannot delete");
+        }
+
         $this->canAccess($request->user(), $new);
 
         $this->newsRepository->delete($new);

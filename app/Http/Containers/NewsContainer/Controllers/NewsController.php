@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Http\Containers\NewsContainer\Controllers;
 
 use App\Http\Containers\CastTypeEnumsContainer\HttpCodesEnums;
+use App\Http\Containers\CommentsContainer\Actions\CommentsStoreAction;
 use App\Http\Containers\NewsContainer\Actions\NewsDeleteAction;
 use App\Http\Containers\NewsContainer\Actions\NewsStoreAction;
 use App\Http\Containers\NewsContainer\Actions\NewsUpdateAction;
@@ -75,7 +76,37 @@ final class NewsController extends Controller
     ): JsonResponse {
         return response()->json(
             $paginationService->run(
-                $newsRepository->query(),
+                $newsRepository->query()->whereToday(),
+                $request,
+            )
+        );
+    }
+
+    /**
+     * @throws ValidationException
+     */
+    public function addComment(
+        int $id,
+        Request $request,
+        NewsRepositoryInterface $newsRepository,
+        CommentsStoreAction $commentsStoreAction,
+    ): JsonResponse {
+        return response()->json(
+            $commentsStoreAction->run($request, $newsRepository->get($id))->toArray(),
+            HttpCodesEnums::HTTP_CREATED,
+        );
+    }
+
+    /** @throws ModelNotFoundException */
+    public function getComments(
+        int $id,
+        Request $request,
+        PaginationService $paginationService,
+        NewsRepositoryInterface $newsRepository,
+    ): JsonResponse {
+        return response()->json(
+            $paginationService->run(
+                $newsRepository->get($id)->comments()->toBase(),
                 $request,
             )
         );

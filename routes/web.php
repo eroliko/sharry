@@ -20,9 +20,13 @@ Route::post('/sanctum/token', [AuthenticationsController::class, 'authenticate']
 
 Route::group(['middleware' => ['auth:sanctum']], function () {
     Route::group(['prefix' => 'news'], function () {
+        Route::get('/{id}/comments', [NewsController::class, 'getComments'])->withoutMiddleware(['auth:sanctum']);
+
         Route::get('/{id}', [NewsController::class, 'show'])->withoutMiddleware(['auth:sanctum']);
 
         Route::get('/', [NewsController::class, 'read'])->withoutMiddleware(['auth:sanctum']);
+
+        Route::post('/{id}/comments', [NewsController::class, 'addComment'])->withoutMiddleware(['auth:sanctum']);
 
         Route::post('/', [NewsController::class, 'store']);
 
@@ -32,9 +36,13 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
     });
 
     Route::group(['prefix' => 'events'], function () {
+        Route::get('/{id}/comments', [EventsController::class, 'getComments'])->withoutMiddleware(['auth:sanctum']);
+
         Route::get('/{id}', [EventsController::class, 'show'])->withoutMiddleware(['auth:sanctum']);
 
         Route::get('/', [EventsController::class, 'read'])->withoutMiddleware(['auth:sanctum']);
+
+        Route::post('/{id}/comments', [EventsController::class, 'addComment'])->withoutMiddleware(['auth:sanctum']);
 
         Route::post('/', [EventsController::class, 'store']);
 

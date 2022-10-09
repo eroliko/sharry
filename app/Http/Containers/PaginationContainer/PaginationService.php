@@ -13,7 +13,7 @@ use Illuminate\Http\Request;
 final class PaginationService extends PaginationClass implements PaginatorDriver
 {
     public function run(
-        Builder $queryBuilder,
+        Builder|\Illuminate\Database\Query\Builder $queryBuilder,
         Request $request,
         int|bool $limit = false,
         string $pageParameterName = 'page',

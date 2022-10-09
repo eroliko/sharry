@@ -7,6 +7,7 @@ namespace App\Http\Containers\NewsContainer\Queries;
 use App\Http\Containers\NewsContainer\Contracts\NewsQueryInterface;
 use App\Http\Containers\NewsContainer\Models\News;
 use App\Http\Core\Queries\QueryBuilder;
+use Illuminate\Support\Carbon;
 
 final class NewsQueryBuilder extends QueryBuilder implements NewsQueryInterface
 {
@@ -39,6 +40,20 @@ final class NewsQueryBuilder extends QueryBuilder implements NewsQueryInterface
     {
         return $this
             ->where(News::ATTR_CONTENT, '=', $content)
+        ;
+    }
+
+    public function whereToday(): NewsQueryInterface
+    {
+        return $this
+            ->whereDate(News::ATTR_CREATED_AT, '=', new Carbon());
+    }
+
+    public function whereIdWithComments(int $id): NewsQueryInterface
+    {
+        return $this
+            ->where(News::ATTR_ID, '=', $id)
+            ->with(News::RELATION_COMMENTS)
         ;
     }
 }

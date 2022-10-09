@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Http\Containers\EventsContainer\Models;
 
+use App\Http\Containers\CommentsContainer\Models\Comments;
 use App\Http\Containers\UsersContainer\Models\User;
 use App\Http\Core\Models\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
@@ -45,6 +46,8 @@ final class Events extends Model
      * Relations
      */
     public const RELATION_USERS = 'users';
+
+    public const RELATION_COMMENTS = 'comments';
 
     /**
      * The attributes that are mass assignable.
@@ -89,6 +92,22 @@ final class Events extends Model
     public function getUsers(): Collection
     {
         return $this->getRelationValue(self::RELATION_USERS);
+    }
+
+    public function comments(): BelongsToMany
+    {
+        return $this->belongsToMany(
+            Comments::class,
+            'events_comments',
+            'event_id',
+            'comment_id',
+        );
+    }
+
+    /** @return Collection<Comments> */
+    public function getComments(): Collection
+    {
+        return $this->getRelationValue(self::RELATION_COMMENTS);
     }
 
     /**

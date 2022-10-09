@@ -16,4 +16,8 @@ interface NewsQueryInterface extends QueryBuilderInterface
     public function whereTitle(string $title): self;
 
     public function whereContent(string $content): self;
+
+    public function whereToday(): self;
+
+    public function whereIdWithComments(int $id): self;
 }
