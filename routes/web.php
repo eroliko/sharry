@@ -1,7 +1,5 @@
 <?php
 
-use App\Http\Containers\AwardContainer\Controllers\AwardController;
-use App\Http\Containers\PageContainer\Controllers\IndexPageController;
 use Illuminate\Support\Facades\Route;
 
 /*
