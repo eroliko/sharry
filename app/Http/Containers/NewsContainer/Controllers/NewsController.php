@@ -9,6 +9,7 @@ use App\Http\Containers\NewsContainer\Actions\NewsDeleteAction;
 use App\Http\Containers\NewsContainer\Actions\NewsStoreAction;
 use App\Http\Containers\NewsContainer\Actions\NewsUpdateAction;
 use App\Http\Containers\NewsContainer\Contracts\NewsRepositoryInterface;
+use App\Http\Containers\PaginationContainer\PaginationService;
 use App\Http\Core\Controllers\Controller;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\JsonResponse;
@@ -64,6 +65,19 @@ final class NewsController extends Controller
     {
         return response()->json(
             $newsRepository->get($id)->toArray()
+        );
+    }
+
+    public function read(
+        Request $request,
+        PaginationService $paginationService,
+        NewsRepositoryInterface $newsRepository,
+    ): JsonResponse {
+        return response()->json(
+            $paginationService->run(
+                $newsRepository->query(),
+                $request,
+            )
         );
     }
 }

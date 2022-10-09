@@ -2,6 +2,10 @@
 
 namespace App\Providers;
 
+use App\Http\Containers\EventsContainer\Contracts\EventsQueryInterface;
+use App\Http\Containers\EventsContainer\Contracts\EventsRepositoryInterface;
+use App\Http\Containers\EventsContainer\Queries\EventsQueryBuilder;
+use App\Http\Containers\EventsContainer\Repositories\EventsRepository;
 use App\Http\Containers\NewsContainer\Contracts\NewsQueryInterface;
 use App\Http\Containers\NewsContainer\Contracts\NewsRepositoryInterface;
 use App\Http\Containers\NewsContainer\Queries\NewsQueryBuilder;
@@ -39,6 +43,16 @@ class AppServiceProvider extends ServiceProvider
         $this->app->bind(
             NewsRepositoryInterface::class,
             NewsRepository::class,
+        );
+
+        $this->app->bind(
+            EventsQueryInterface::class,
+            EventsQueryBuilder::class,
+        );
+
+        $this->app->bind(
+            EventsRepositoryInterface::class,
+            EventsRepository::class,
         );
     }
 
